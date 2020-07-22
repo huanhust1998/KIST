@@ -1,9 +1,6 @@
 package main;
 
-import main.dao.StudentDAOImpl;
-import main.dao.StudentDAO;
-import main.dao.SubjectDAO;
-import main.dao.SubjectDAOImpl;
+import main.dao.*;
 import main.model.Student;
 import main.model.Subject;
 
@@ -18,6 +15,7 @@ public class Main {
         List<Student> students = new ArrayList<>();
         SubjectDAO subjectDAO = new SubjectDAOImpl();
         List<Subject> subjects = new ArrayList<>();
+        ScoreDAO scoreDAO = new ScoreDAOImpl();
         System.out.println("1. Add Student \n" +
                 "2. Delete Student \n" +
                 "3. Search Student \n" +
@@ -42,9 +40,9 @@ public class Main {
                 studentDAO.delete(id);
                 students = studentDAO.getAllStudent();
             }else if(yourChoice==3){
-                System.out.print("Enter name student: ");
-                String name = scanner.nextLine();
-                Student student = studentDAO.getStudent(name);
+                System.out.print("Enter id student: ");
+                int id = Integer.parseInt(scanner.nextLine());
+                Student student = studentDAO.getStudent(id);
                 System.out.println(student.getId()+" | "+ student.getName()+" | "+student.getClassName());
             }else if(yourChoice==4){
                 subjectDAO.insert();
@@ -59,6 +57,8 @@ public class Main {
                 int id = Integer.parseInt(scanner.nextLine());
                 Subject subject = subjectDAO.getStudent(id);
                 System.out.println(subject.getId()+" | "+subject.getName());
+            }else if(yourChoice==7){
+                scoreDAO.insert();
             }else if(yourChoice==10){
                 System.out.println("Exit");
                 break;
