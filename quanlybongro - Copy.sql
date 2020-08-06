@@ -120,17 +120,22 @@ Create Trigger kiemtratrongtai after INSERT ON dieukhien FOR EACH ROW
 END //
 
 # Cap nhat diem va so loi
-DELIMITER //
+delimiter //
 create trigger updateDiem after
 insert on `thamgia`
 for each row
 begin  
-	update trandau set diemCN = diemCN + new.sodiem, diemK = diemK + new.sodiem, soLoiCN = soLoiCN + new.soloi, soLoiK = soLoiK + new.soloi
+	update trandau set diemCN = diemCN + new.sodiem, soLoiCN = soLoiCN + new.soloi
     where trandau.mavong = new.mavong
     and trandau.matran = new.matran
     and trandau.doiCN = new.tendoi;
+    
+    update trandau set diemK = diemK + new.sodiem, soLoiK = soLoiK + new.soloi
+    where trandau.mavong = new.mavong
+    and trandau.matran = new.matran
+    and trandau.doiK = new.tendoi;
 end//
-
+deilimiter ;
 # Moi tran dau chi co toi da 10 cau thu
 DELIMITER //
 Create Trigger kiemtramaxcauthu1trandau after INSERT ON thamgia FOR EACH ROW
@@ -389,6 +394,8 @@ insert into trandau values('vong20','tran3','4','5',0,0,0,0);
 
 
 /*dữ liệu bảng tham gia*/
+  /*vong 1 tran 1*/
+     /*1 gap 2*/
 insert into thamgia values('vong1','tran1','1','01',23,1);
 insert into thamgia values('vong1','tran1','1','02',13,2);
 insert into thamgia values('vong1','tran1','1','03',20,3);
@@ -397,7 +404,67 @@ insert into thamgia values('vong1','tran1','1','05',10,5);
 insert into thamgia values('vong1','tran1','1','06',15,6);
 insert into thamgia values('vong1','tran1','1','07',11,7);
 insert into thamgia values('vong1','tran1','1','08',18,8);
-insert into thamgia values('vong1','tran1','1','09',30,00);
+insert into thamgia values('vong1','tran1','1','09',30,0);
 insert into thamgia values('vong1','tran1','1','10',3,0);
 
+insert into thamgia values('vong1','tran1','2','11',43,1);
+insert into thamgia values('vong1','tran1','2','12',13,2);
+insert into thamgia values('vong1','tran1','2','13',20,3);
+insert into thamgia values('vong1','tran1','2','14',2,6);
+insert into thamgia values('vong1','tran1','2','15',10,5);
+insert into thamgia values('vong1','tran1','2','06',19,6);
+insert into thamgia values('vong1','tran1','2','07',11,7);
+insert into thamgia values('vong1','tran1','2','08',15,8);
+insert into thamgia values('vong1','tran1','2','09',30,0);
+insert into thamgia values('vong1','tran1','2','10',14,0);
+
+   /*vong 1 tran 2*/
+     /*3 gap 4*/
+
+insert into thamgia values('vong1','tran2','3','01',10,1);
+insert into thamgia values('vong1','tran2','3','02',20,2);
+insert into thamgia values('vong1','tran2','3','03',20,3);
+insert into thamgia values('vong1','tran2','3','14',2,6);
+insert into thamgia values('vong1','tran2','3','15',50,5);
+insert into thamgia values('vong1','tran2','3','06',15,6);
+insert into thamgia values('vong1','tran2','3','07',11,8);
+insert into thamgia values('vong1','tran2','3','11',18,0);
+insert into thamgia values('vong1','tran2','3','09',11,0);
+insert into thamgia values('vong1','tran2','3','10',13,0);
+
+insert into thamgia values('vong1','tran2','4','11',3,1);
+insert into thamgia values('vong1','tran2','4','12',33,2);
+insert into thamgia values('vong1','tran2','4','13',29,0);
+insert into thamgia values('vong1','tran2','4','14',21,6);
+insert into thamgia values('vong1','tran2','4','15',0,5);
+insert into thamgia values('vong1','tran2','4','06',9,8);
+insert into thamgia values('vong1','tran2','4','07',11,7);
+insert into thamgia values('vong1','tran2','4','08',15,8);
+insert into thamgia values('vong1','tran2','4','09',21,0);
+insert into thamgia values('vong1','tran2','4','10',14,0);
+
+
+   /*vong 1 tran 3*/
+     /*5 gap 6*/
+insert into thamgia values('vong1','tran3','5','01',10,1);
+insert into thamgia values('vong1','tran3','5','02',20,2);
+insert into thamgia values('vong1','tran3','5','03',20,3);
+insert into thamgia values('vong1','tran3','5','14',2,6);
+insert into thamgia values('vong1','tran3','5','05',50,5);
+insert into thamgia values('vong1','tran3','5','06',15,1);
+insert into thamgia values('vong1','tran3','5','07',11,8);
+insert into thamgia values('vong1','tran3','5','11',18,1);
+insert into thamgia values('vong1','tran3','5','13',11,0);
+insert into thamgia values('vong1','tran3','5','10',13,0);
+
+insert into thamgia values('vong1','tran3','6','11',3,1);
+insert into thamgia values('vong1','tran3','6','12',3,2);
+insert into thamgia values('vong1','tran3','6','13',50,10);
+insert into thamgia values('vong1','tran3','6','14',21,6);
+insert into thamgia values('vong1','tran3','6','15',10,5);
+insert into thamgia values('vong1','tran3','6','01',1,0);
+insert into thamgia values('vong1','tran3','6','02',11,0);
+insert into thamgia values('vong1','tran3','6','03',11,8);
+insert into thamgia values('vong1','tran3','6','04',21,0);
+insert into thamgia values('vong1','tran3','6','10',14,0);
 
