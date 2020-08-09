@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DesignMilkTea</title>
+</head>
+<body>
+<h1>Design your milk tea</h1>
+<img th:src="@{/image/trasua1.jpg}"/>
+<form method="POST" th:object="${milktea}">
+    <div class="gird">
+        <div class="ingredient-group" id="sugar">
+            <h3>Designate your sugar:</h3>
+            <div th:each="ingredient : ${sugar}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}"></span><br/>
+            </div>
+        </div>
+        <div class="ingredient-group" id="ice">
+            <h3>Designate your ice:</h3>
+            <div th:each="ingredient : ${ice}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}"></span><br/>
+            </div>
+        </div>
+        <div class="ingredient-group" id="topping">
+            <h3>Designate your topping:</h3>
+            <div th:each="ingredient : ${topping}">
+                <input name="ingredients" type="checkbox" th:value="${ingredient.id}"/>
+                <span th:text="${ingredient.name}"></span><br/>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3>Name your milktea creation:</h3>
+        <input type="text" th:field="*{name}"/> <br/>
+        <span class="validationError" style="color: red"
+              th:if="${#fields.hasErrors('name')}"
+              th:errors = "*{name}"></span><br>
+        <button>Submit your milktea</button>
+    </div>
+</form>
+</body>
+</html>
