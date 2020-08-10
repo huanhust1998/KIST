@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nhập thông tin</title>
+</head>
+<body>
+<form method="post" th:object="${user}">
+    <h1>Information User Email</h1>
+    <table>
+        <tr>
+            <td>Name: </td>
+            <td><input type="text" th:filed="*{name}"></td>
+        </tr>
+        <tr>
+            <td>Age: </td>
+            <td><input type="text" th:filed="*{age}"></td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td><input type="text" th:filed="*{email}"></td>
+        </tr>
+        <tr>
+            <td><button>Submit email user</button></td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

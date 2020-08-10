@@ -159,9 +159,8 @@ Create Trigger kiemtravongdau after INSERT ON thamgia FOR EACH ROW
 		DECLARE maxvongdau int;
         SET sovongdau := 0;
         SET maxvongdau := 40;
-        SELECT COUNT(*) INTO sovongdau 
-        FROM thamgia
-		GROUP BY thamgia.mavong;
+        SELECT COUNT(distinct thamgia.mavong) INTO sovongdau 
+        FROM thamgia INNER JOIN trandau ON thamgia.mavong = trandau.mavong;
 	IF sovongdau > maxvongdau THEN begin signal sqlstate '45000' set message_text ='MyTriggerError: Vuot qua so vong dau trong 1 mua giai';
     end;
 	END IF;

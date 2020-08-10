@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result Order</title>
+</head>
+<body>
+<div class="gird" th:object="${users}">
+    <h1>Result Order</h1>
+    <div th:each="user : ${users}">
+        <span th:text="${user.name}"></span>
+        <span th:text="${user.age}"></span>
+        <span th:text="${user.email}"></span>
+    </div>
+</div>
+</body>
+</html>
