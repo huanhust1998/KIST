@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Nhập thông tin</title>
@@ -20,11 +21,8 @@
             <td>Email: </td>
             <td><input type="text" th:filed="*{email}"></td>
         </tr>
-        <tr>
-            <td><button>Submit email user</button></td>
-            <td></td>
-        </tr>
     </table>
+    <input type="submit" value="Submit order">
 </form>
 </body>
 </html>

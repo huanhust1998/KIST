@@ -30,7 +30,7 @@ public class UserRepository implements JdbcUserRepository{
     @Override
     public User save(User user) {
         jdbcTemplate.update(
-                "insert into useremail(name,age,email)",
+                "insert into useremail (name,age,email) values(?,?,?) ",
                 user.getName(),
                 user.getAge(),
                 user.getEmail()
