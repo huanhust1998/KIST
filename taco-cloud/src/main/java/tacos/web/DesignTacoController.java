@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import tacos.entity.Taco;
 import tacos.entity.IngredientTaco;
 import tacos.entity.IngredientTaco.Type;
-import tacos.repository.IngredientTacoRepository;
+import tacos.repository.IngredientRepository;
+import tacos.repository.TacoRepository;
 
 import javax.validation.Valid;
 
@@ -24,15 +25,16 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/designtaco")
 public class DesignTacoController {
-    private final IngredientTacoRepository ingredientRepository;
+    private final IngredientRepository ingredientRepository;
+    private final TacoRepository tacoRepository;
     @Autowired
-    public DesignTacoController(IngredientTacoRepository ingredientRepository){
+    public DesignTacoController(IngredientRepository ingredientRepository,TacoRepository tacoRepository){
         this.ingredientRepository = ingredientRepository;
+        this.tacoRepository = tacoRepository;
     }
     @GetMapping
     public String showDesignForm(Model model) {
-        List<IngredientTaco> ingredients = new ArrayList<>();
-        ingredientRepository.findAll().forEach(ingredients::add);
+        List<IngredientTaco> ingredients =  (List<IngredientTaco>)ingredientRepository.findAll();
         Type[] types = IngredientTaco.Type.values();
         for (Type type : types) {
             model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
@@ -41,10 +43,7 @@ public class DesignTacoController {
         return "designtaco";
     }
     @PostMapping
-    public String processDesign(@Valid Taco taco, Errors errors){
-        if(errors.hasErrors()){
-            return "designtaco";
-        }
+    public String processDesign(Taco taco){
         log.info("Processing design: " + taco);
         return "redirect:/orders/current";
     }

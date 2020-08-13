@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import tacos.entity.Order;
-import tacos.repository.JdbcOrderRepository;
+import tacos.repository.OrderRepository;
 
 import javax.validation.Valid;
 
@@ -21,10 +21,10 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("/orders")
 public class OrderController {
-    private JdbcOrderRepository jdbcOrderRepository;
+    private OrderRepository orderRepository;
     @Autowired
-    public OrderController(JdbcOrderRepository jdbcOrderRepository){
-        this.jdbcOrderRepository = jdbcOrderRepository;
+    public OrderController(OrderRepository orderRepository){
+        this.orderRepository = orderRepository;
     }
     @GetMapping("/current")
     public String orderForm(Model model) {
@@ -33,12 +33,9 @@ public class OrderController {
     }
 
     @PostMapping("/add")
-    public String processOrder(@Valid Order order, Errors errors,Model model) {
-        if(errors.hasErrors()){
-            return "orderForm";
-        }
-        jdbcOrderRepository.save(order);
-        model.addAttribute("orders",jdbcOrderRepository.findAll());
+    public String processOrder(Order order,Model model) {
+        orderRepository.save(order);
+        model.addAttribute("orders",orderRepository.findAll());
         log.info("Order saved: " + order);
         return "resultset";
     }

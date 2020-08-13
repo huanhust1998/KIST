@@ -1,20 +1,34 @@
 package tacos.entity;
 
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.persistence.*;
 
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
 @RequiredArgsConstructor
-public class Order {
-    private String id;
+@Entity
+@Table(name = "Taco_Order")
+public class Order implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Date placedAt;
     @NotNull(message = "Name is required")
     private String name;
     @NotBlank(message = "Street is required")
@@ -32,6 +46,8 @@ public class Order {
     //@Digits(integer=3, fraction=0, message="Invalid CVV")
     private String ccCVV;
 
+    @ManyToMany(targetEntity = Taco.class)
+    private List<Taco> tacos = new ArrayList<>();
     public Order(@NotNull(message = "Name is required") String name, @NotBlank(message = "Street is required") String street, @NotBlank(message = "City is required") String city, @NotBlank(message = "State is required") String state, @NotBlank(message = "Zip code is required") String zip, String ccNumber, String ccExpiration, String ccCVV) {
         this.name = name;
         this.street = street;
